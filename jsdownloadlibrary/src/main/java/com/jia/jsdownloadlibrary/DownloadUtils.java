@@ -39,6 +39,7 @@ public class DownloadUtils {
     private String downloadUrl;
 
     public DownloadUtils(String baseUrl, DownloadProgressListener listener) {
+
         this.baseUrl = baseUrl;
         this.listener = listener;
 
