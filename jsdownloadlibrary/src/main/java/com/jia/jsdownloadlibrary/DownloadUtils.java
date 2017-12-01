@@ -4,6 +4,7 @@ import android.os.Environment;
 import android.support.annotation.NonNull;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -69,6 +70,8 @@ public class DownloadUtils {
 
         listener.onStartDownload();
 
+        // subscribeOn()改变调用它之前代码的线程
+        // observeOn()改变调用它之后代码的线程
         retrofit.create(DownloadService.class)
                 .download(url)
                 .subscribeOn(Schedulers.io())
@@ -80,7 +83,7 @@ public class DownloadUtils {
                         return responseBody.byteStream();
                     }
                 })
-                .observeOn(Schedulers.computation())
+                .observeOn(Schedulers.computation()) // 用于计算任务
                 .doOnNext(new Action1<InputStream>() {
                     @Override
                     public void call(InputStream inputStream) {
@@ -102,8 +105,7 @@ public class DownloadUtils {
      */
     private void writeFile(InputStream inputString, String filePath) {
 
-        File file = new File(Environment.getExternalStoragePublicDirectory
-                (Environment.DIRECTORY_DOWNLOADS), "file.apk");
+        File file = new File(filePath);
         if (file.exists()) {
             file.delete();
         }
@@ -111,6 +113,7 @@ public class DownloadUtils {
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(file);
+
             byte[] b = new byte[1024];
 
             while ((inputString.read(b)) != -1) {
@@ -118,11 +121,12 @@ public class DownloadUtils {
             }
             inputString.close();
             fos.close();
+
+        } catch (FileNotFoundException e) {
+            listener.onFail("FileNotFoundException");
         } catch (IOException e) {
-            e.printStackTrace();
             listener.onFail("IOException");
         }
-
 
     }
 }
