@@ -1,7 +1,7 @@
 package com.jia.jsdownloadlibrary.permission;
 
 /**
- * Describtion:权限请求回调
+ * Description:权限请求回调
  * Created by jia on 2017/6/29.
  * 人之所以能，是相信能
  */
