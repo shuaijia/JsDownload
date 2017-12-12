@@ -18,16 +18,16 @@ import okio.Source;
  * Created by jia on 2017/11/30.
  * 人之所以能，是相信能
  */
-public class DownloadProgressResponseBody extends ResponseBody {
+public class JsResponseBody extends ResponseBody {
 
     private ResponseBody responseBody;
 
-    private DownloadProgressListener downloadListener;
+    private JsDownloadListener downloadListener;
 
     // BufferedSource 是okio库中的输入流，这里就当作inputStream来使用。
     private BufferedSource bufferedSource;
 
-    public DownloadProgressResponseBody(ResponseBody responseBody, DownloadProgressListener downloadListener) {
+    public JsResponseBody(ResponseBody responseBody, JsDownloadListener downloadListener) {
         this.responseBody = responseBody;
         this.downloadListener = downloadListener;
     }

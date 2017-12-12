@@ -5,7 +5,7 @@ package com.jia.jsdownloadlibrary;
  * Created by jia on 2017/11/30.
  * 人之所以能，是相信能
  */
-public interface DownloadProgressListener {
+public interface JsDownloadListener {
 
     void onStartDownload();
 

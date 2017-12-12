@@ -13,11 +13,11 @@ import okhttp3.Response;
  * 观察，修改以及可能短路的请求输出和响应请求的回来。
  * 通常情况下拦截器用来添加，移除或者转换请求或者回应的头部信息
  */
-public class DownloadProgressInterceptor implements Interceptor {
+public class JsDownloadInterceptor implements Interceptor {
 
-    private DownloadProgressListener downloadListener;
+    private JsDownloadListener downloadListener;
 
-    public DownloadProgressInterceptor(DownloadProgressListener downloadListener) {
+    public JsDownloadInterceptor(JsDownloadListener downloadListener) {
         this.downloadListener = downloadListener;
     }
 
@@ -25,6 +25,6 @@ public class DownloadProgressInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Response response = chain.proceed(chain.request());
         return response.newBuilder().body(
-                new DownloadProgressResponseBody(response.body(), downloadListener)).build();
+                new JsResponseBody(response.body(), downloadListener)).build();
     }
 }

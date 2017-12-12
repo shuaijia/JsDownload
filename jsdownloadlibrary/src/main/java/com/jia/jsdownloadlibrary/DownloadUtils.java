@@ -33,18 +33,18 @@ public class DownloadUtils {
 
     private Retrofit retrofit;
 
-    private DownloadProgressListener listener;
+    private JsDownloadListener listener;
 
     private String baseUrl;
 
     private String downloadUrl;
 
-    public DownloadUtils(String baseUrl, DownloadProgressListener listener) {
+    public DownloadUtils(String baseUrl, JsDownloadListener listener) {
 
         this.baseUrl = baseUrl;
         this.listener = listener;
 
-        DownloadProgressInterceptor mInterceptor = new DownloadProgressInterceptor(listener);
+        JsDownloadInterceptor mInterceptor = new JsDownloadInterceptor(listener);
 
         OkHttpClient httpClient = new OkHttpClient.Builder()
                 .addInterceptor(mInterceptor)
