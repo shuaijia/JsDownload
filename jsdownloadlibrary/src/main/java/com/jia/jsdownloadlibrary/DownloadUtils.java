@@ -116,8 +116,9 @@ public class DownloadUtils {
 
             byte[] b = new byte[1024];
 
-            while ((inputString.read(b)) != -1) {
-                fos.write(b);
+            int len;
+            while ((len = inputString.read(b)) != -1) {
+                fos.write(b,0,len);
             }
             inputString.close();
             fos.close();
